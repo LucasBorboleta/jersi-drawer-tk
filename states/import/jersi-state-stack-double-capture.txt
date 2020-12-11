@@ -1,0 +1,3 @@
+#  Stack double capture
+
+P:c3/R:c3/s:c5

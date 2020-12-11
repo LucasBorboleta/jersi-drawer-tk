@@ -1,0 +1,15 @@
+
+# whites
+
+S:b2/P:b3
+R:c2/R:c3/F:c3/P:c5
+R:e7
+P:f7/K:f7
+
+
+
+# blacks
+r:g1/k:g1/r:g2/f:g2/s:g3/r:g3
+p:f2/p:f3/s:f3
+m:g6/m:g7
+

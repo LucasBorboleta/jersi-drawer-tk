@@ -1,0 +1,8 @@
+
+# whites
+S:b3/P:b3
+W:b/W:b
+
+# blacks
+k:b7
+

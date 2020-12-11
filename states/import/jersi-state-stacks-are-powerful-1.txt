@@ -1,0 +1,6 @@
+# Stacks are powerful : they can capture twice per turn
+
+
+P:c3/R:c3
+s:c5/p:b6/s:b6
+

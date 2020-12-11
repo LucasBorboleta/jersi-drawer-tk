@@ -1,0 +1,25 @@
+
+# whites
+F:b1/F:b8/K:a4
+R:b2/P:b3/S:b4/R:b5/P:b6/S:b7
+R:a3/S:a2/P:a1
+S:a5/R:a6/P:a7
+
+# white reserve
+W:c/W:c
+
+# blacks
+f:h1/f:h8/k:i4
+r:h7/r:h4/p:h3/s:h2
+r:i5/s:i6/p:i7/s:i3/r:i2/p:i1
+
+# black reserve
+m:i/m:i/m:h/m:h/w:g/w:g
+
+# helm defense
+M:c4/M:c5/M:c6/M:c7
+
+# black opening
+s:f4/p:f4
+
+

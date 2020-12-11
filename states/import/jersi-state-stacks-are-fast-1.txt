@@ -1,0 +1,12 @@
+# Stacks are fast : they can cross the board in 4 turns
+
+
+P:a3/R:a3
+
+P:c4/R:c4
+
+P:e4/R:e4
+
+P:g4/R:g4
+
+P:i3/R:i3

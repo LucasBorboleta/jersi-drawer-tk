@@ -1,0 +1,7 @@
+
+# whites
+P:d3/S:d4
+R:c3/K:b4
+
+# blacks
+r:g2/s:g2
