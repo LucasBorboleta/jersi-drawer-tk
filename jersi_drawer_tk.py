@@ -1015,7 +1015,7 @@ def set_cube_at_position(position_label, cube_label):
         raise("No room for cube '%s' at position '%s' !!!" % (cube_label, position_label))
 
 
-if __name__ == "__main__":
+def main():
     print("Hello")
 
     print(_COPYRIGHT_AND_LICENSE)
@@ -1023,3 +1023,7 @@ if __name__ == "__main__":
     draw_jersi()
 
     print("Bye")
+
+
+if __name__ == "__main__":
+    main()
