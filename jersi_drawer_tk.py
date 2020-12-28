@@ -64,6 +64,7 @@ CANVAS_RATIO = 1
 CANVAS_HEIGHT = 600
 CANVAS_WIDTH = int(CANVAS_HEIGHT * CANVAS_RATIO)
 
+USE_JERSI_PURE_STYLE = True
 
 # number of hexagons to draw
 NX = 9 + 2
@@ -437,6 +438,43 @@ def draw_scissors_face(canvas, cube_center, cube_vertices, face_color):
 
 def draw_mountain_face(canvas, cube_center, cube_vertices, face_color):
 
+    if USE_JERSI_PURE_STYLE:
+        draw_pure_mountain_face(canvas, cube_center, cube_vertices, face_color)
+    else:
+        draw_simple_mountain_face(canvas, cube_center, cube_vertices, face_color)
+
+
+def draw_pure_mountain_face(canvas, cube_center, cube_vertices, face_color):
+
+    face_vertex_NE = 0.5*cube_center + 0.5*cube_vertices[0]
+    face_vertex_NW = 0.5*cube_center + 0.5*cube_vertices[1]
+    face_vertex_SW = 0.5*cube_center + 0.5*cube_vertices[2]
+    face_vertex_SE = 0.5*cube_center + 0.5*cube_vertices[3]
+
+    face_N = 0.5*(face_vertex_NW + face_vertex_NE)
+    face_S = 0.5*(face_vertex_SW + face_vertex_SE)
+
+    face_W = 0.5*(face_vertex_NW + face_vertex_SW)
+    face_E = 0.5*(face_vertex_NE + face_vertex_SE)
+
+    face_data = [*face_N, *face_W, *face_E]
+
+    canvas.create_polygon(face_data,
+                          fill='',
+                          outline=face_color,
+                          width=CUBE_LINE_WIDTH,
+                          joinstyle=tk.ROUND)
+
+    face_data = [*face_S, *face_W, *face_E]
+
+    canvas.create_polygon(face_data,
+                          fill='',
+                          outline=face_color,
+                          width=CUBE_LINE_WIDTH,
+                          joinstyle=tk.ROUND)
+
+def draw_simple_mountain_face(canvas, cube_center, cube_vertices, face_color):
+
     face_vertex_NE = 0.5*cube_center + 0.5*cube_vertices[0]
     face_vertex_NW = 0.5*cube_center + 0.5*cube_vertices[1]
     face_vertex_SW = 0.5*cube_center + 0.5*cube_vertices[2]
@@ -765,7 +803,7 @@ def draw_jersi():
 
     main_canvas.grid(row=4, columnspan=5)
 
-    if False:
+    if True:
         init_state()
         draw_state(main_canvas)
 
