@@ -138,7 +138,7 @@ class CubeConfig(enum.Enum):
 
 class CubeType(enum.Enum):
     KING = 'K'
-    FOUL = 'F'
+    FOOL = 'F'
     PAPER = 'P'
     ROCK = 'R'
     SCISSORS = 'S'
@@ -149,7 +149,7 @@ class CubeType(enum.Enum):
 CUBE_COLORED_TYPES = dict()
 
 CUBE_COLORED_TYPES['K'] = (CubeType.KING, CubeColor.WHITE)
-CUBE_COLORED_TYPES['F'] = (CubeType.FOUL, CubeColor.WHITE)
+CUBE_COLORED_TYPES['F'] = (CubeType.FOOL, CubeColor.WHITE)
 CUBE_COLORED_TYPES['R'] = (CubeType.ROCK, CubeColor.WHITE)
 CUBE_COLORED_TYPES['P'] = (CubeType.PAPER, CubeColor.WHITE)
 CUBE_COLORED_TYPES['S'] = (CubeType.SCISSORS, CubeColor.WHITE)
@@ -158,7 +158,7 @@ CUBE_COLORED_TYPES['W'] = (CubeType.WISE, CubeColor.WHITE)
 
 
 CUBE_COLORED_TYPES['k'] = (CubeType.KING, CubeColor.BLACK)
-CUBE_COLORED_TYPES['f'] = (CubeType.FOUL, CubeColor.BLACK)
+CUBE_COLORED_TYPES['f'] = (CubeType.FOOL, CubeColor.BLACK)
 CUBE_COLORED_TYPES['r'] = (CubeType.ROCK, CubeColor.BLACK)
 CUBE_COLORED_TYPES['p'] = (CubeType.PAPER, CubeColor.BLACK)
 CUBE_COLORED_TYPES['s'] = (CubeType.SCISSORS, CubeColor.BLACK)
@@ -298,7 +298,7 @@ def draw_king_face(canvas, cube_center, cube_vertices, face_color):
     pass
 
 
-def draw_foul_face(canvas, cube_center, cube_vertices, face_color):
+def draw_fool_face(canvas, cube_center, cube_vertices, face_color):
 
 
     def rotate_90_degrees(vector):
@@ -563,7 +563,7 @@ def draw_wise_face(canvas, cube_center, cube_vertices, face_color):
 
 
 FACE_DRAWERS = dict()
-FACE_DRAWERS[CubeType.FOUL] = draw_foul_face
+FACE_DRAWERS[CubeType.FOOL] = draw_fool_face
 FACE_DRAWERS[CubeType.KING] = draw_king_face
 FACE_DRAWERS[CubeType.PAPER] = draw_paper_face
 FACE_DRAWERS[CubeType.ROCK] = draw_rock_face
