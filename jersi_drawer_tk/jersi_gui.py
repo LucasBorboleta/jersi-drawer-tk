@@ -31,8 +31,6 @@ from tkinter import filedialog
 
 import PIL
 
-import numpy as np
-
 
 class JersiError(Exception):
     """Customized exception dedicated to all classes of JERSI"""
@@ -49,6 +47,126 @@ def jersi_assert(condition, message):
     if not condition:
         raise JersiError(message)
 
+
+class TinyVector:
+    """Lightweight algebra on 2D vectors, inspired by numpy ndarray."""
+
+    __slots__ = ("__x", "__y")
+
+    def __init__(self, xy_pair=None):
+        if xy_pair is None:
+            self.__x = 0.
+            self.__y = 0.
+
+        else:
+            self.__x = float(xy_pair[0])
+            self.__y = float(xy_pair[1])
+
+
+    def __repr__(self):
+        return str(self)
+
+
+    def __str__(self):
+        return str((self.__x, self.__y))
+
+
+    def __getitem__(self, key):
+        if key == 0:
+            return self.__x
+
+        elif key == 1:
+            return self.__y
+
+        else:
+            raise IndexError()
+
+
+    def __neg__(self):
+        return TinyVector((-self.__x , -self.__y))
+
+
+    def __pos__(self):
+        return TinyVector((self.__x , self.__y))
+
+
+    def __add__(self, other):
+        if isinstance(other, TinyVector):
+            return TinyVector((self.__x + other.__x, self.__y + other.__y))
+
+        elif isinstance(other, (int, float)):
+            return TinyVector((self.__x + other, self.__y + other))
+
+        else:
+            raise NotImplementedError()
+
+
+    def __sub__(self, other):
+        if isinstance(other, TinyVector):
+            return TinyVector((self.__x - other.__x, self.__y - other.__y))
+
+        elif isinstance(other, (int, float)):
+            return TinyVector((self.__x - other, self.__y - other))
+
+        else:
+            raise NotImplementedError()
+
+
+    def __mul__(self, other):
+        if isinstance(other, (int, float)):
+            return TinyVector((self.__x*other, self.__y*other))
+
+        else:
+            raise NotImplementedError()
+
+
+    def __truediv__(self, other):
+        if isinstance(other, (int, float)):
+            return TinyVector((self.__x/other, self.__y/other))
+
+        else:
+            raise NotImplementedError()
+
+
+    def __radd__(self, other):
+        return self.__add__(other)
+
+
+    def __rmul__(self, other):
+        return self.__mul__(other)
+
+
+    def __rtruediv__(self, other):
+        return self.__div__(other)
+
+
+    def __rsub__(self, other):
+        if isinstance(other, TinyVector):
+            return TinyVector((-self.__x + other.__x, -self.__y + other.__y))
+
+        elif isinstance(other, (int, float)):
+            return TinyVector((-self.__x + other, -self.__y + other))
+
+        else:
+            raise NotImplementedError()
+
+
+    @staticmethod
+    def inner(that, other):
+        if isinstance(that, TinyVector) and isinstance(other, TinyVector):
+            return (that.__x*other.__x + that.__y*other.__y)
+
+        else:
+            raise NotImplementedError()
+
+
+    @staticmethod
+    def norm(that):
+        if isinstance(that, TinyVector):
+            return math.sqrt(that.__x*that.__x + that.__y*that.__y)
+
+        else:
+            raise NotImplementedError()
 
 JERSI_HOME = os.path.abspath(os.path.dirname(__file__))
 
@@ -99,11 +217,11 @@ CUBE_LINE_WIDTH = int(0.05*HEXA_SIDE)
 HEXA_LINE_WIDTH = int(0.02*HEXA_SIDE)
 
 # Origin of the orthonormal x-y frame and the oblic u-v frame
-ORIGIN = np.array((CANVAS_WIDTH/2, CANVAS_HEIGHT/2))
+ORIGIN = TinyVector((CANVAS_WIDTH/2, CANVAS_HEIGHT/2))
 
 # Unit vectors of the orthonormal x-y frame
-UNIT_X = np.array((1, 0))
-UNIT_Y = np.array((0, -1))
+UNIT_X = TinyVector((1, 0))
+UNIT_Y = TinyVector((0, -1))
 
 # Unit vectors of the oblic u-v frame
 UNIT_U = UNIT_X
@@ -303,8 +421,8 @@ def draw_fool_face(canvas, cube_center, cube_vertices, face_color):
 
     def rotate_90_degrees(vector):
         """Rotate 90 degrees counter clock"""
-        projection_x = np.inner(vector, UNIT_X)
-        projection_y = np.inner(vector, UNIT_Y)
+        projection_x = TinyVector.inner(vector, UNIT_X)
+        projection_y = TinyVector.inner(vector, UNIT_Y)
         rotated_unit_x = UNIT_Y
         rotated_unit_y = -UNIT_X
         return projection_x*rotated_unit_x + projection_y*rotated_unit_y
@@ -329,7 +447,7 @@ def draw_fool_face(canvas, cube_center, cube_vertices, face_color):
     face_vertex_NC = 0.5*(face_vertex_N + cube_center)
     face_vertex_SC = 0.5*(face_vertex_S + cube_center)
 
-    cube_side = np.linalg.norm(face_vertex_NW - face_vertex_NE)
+    cube_side = TinyVector.norm(face_vertex_NW - face_vertex_NE)
 
     # little angular overlap to ensure coninuity bewteen arcs
     angle_epsilon = 0.01*180

@@ -1,3 +1,4 @@
-_SAVED
-.pylint.d
 *.pyc
+__pycache__
+.env
+.spyproject
